@@ -13,4 +13,8 @@ app.use(morgan('dev'));
 
 const io = socket(server);
 
-io.on('connection', socket => console.log('Socket connection', socket.id));
+io.on('connection', socket => {
+    console.log('Socket connection', socket.id);
+
+    socket.on('chat', data => io.sockets.emit('chat', data));
+});
